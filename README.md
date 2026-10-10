@@ -1,64 +1,48 @@
 # Sudoku-Game-cpp
 sudoku game development in c++
- #include <iostream> 
-#include <fstream>
- #include <ctime>
- #include <cstdlib>
- #include <algorithm>
 
-using namespace std;
-
-// ---- Player Class  ----
+## Project Description
+Sudoku Game in C++ is a mini project developed using the C++ programming language. It is designed to provide a simple Sudoku puzzle game where players can solve puzzles by filling empty cells with numbers according to Sudoku rules.
 
 
-class Player
-
-{
-
-private:
-
-int score;
- int mistakes; 
-time_t startTime;
-
-public:
-
-Player()
-
-{
-score=1000;
-mistakes=0;
-startTime=time(0);
-}
-void addScore(int s)
-{
-score+=s;
-}
-void addMistake()
-{
-
-mistakes++;
- score -= 15;
-}
-int getScore()
-{
-return score;
-}
-
-int getMistakes()
-{
-return mistakes;
-}
-int getTime()
-
-{
-
-return time(0) - startTime;
-}
-};
+## Objectives
+1. To develop a Sudoku game using C++.
+2. To improve logical thinking and problem solving 
+3. To understand and apply programming 
+   concepts in a practical project.
 
 
+## Features
+1.Display a Sudoku puzzle.
+2.Allow players to enter numbers into empty cells.
+3.Check the correctness of the entered numbers.
+4.Display the puzzle in a clear format.
 
 
+## Technologies Used
+C++
+Git
+GitHub
 
+## Project Structure
+ README.md – Contains information about the  project.
+ main.cpp – Contains the main program code.
+
+
+## How to Run
+ Clone or download this repository.
+ Open the project in a C++ editor.
+ Compile the source code using a C++ compiler.
+ Run the compiled program.
+
+## Team Members
+ Shaheed mastan sk
+ M.Jeevan kumar 
+ V.Manoj Kumar 
+ M.sahith 
+
+## Future Enhancements
+ Add different difficulty levels.
+ Improve the user interface.
+ Add a score or timer system.
 
