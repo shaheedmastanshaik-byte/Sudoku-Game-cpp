@@ -26,3 +26,31 @@ public:
     {
         score += s;
     }
+    void addMistake() {
+
+   mistakes++;
+
+   score -= 15;
+
+   int getScore() {
+
+   return score;
+
+   }
+   int getMistakes()
+
+  {
+
+  return mistakes;
+
+  }
+
+}
+
+};
+
+{
+
+int getTime()
+
+return time(0) - startTime;
