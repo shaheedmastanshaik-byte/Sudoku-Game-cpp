@@ -268,7 +268,7 @@ S. No.| Name
 1| Shaheed Mastan Shaik
 2| M. Jeevan Kumar
 3| V. Manoj Kumar
-4| M. Sabith
+4| M. Sahith
 
 📌 12. Project Status
 
