@@ -1,129 +1,272 @@
 
+🧩 Sudoku Game in C++
 
 
 
+📌 About the Project
 
+Sudoku Game in C++ is an interactive, console-based Sudoku application developed using C++17 and Object-Oriented Programming (OOP).
 
+The project generates randomized Sudoku puzzles, provides multiple difficulty levels, validates player moves and tracks game performance.
 
-  # 🧩 C++ Console Sudoku Game
+It also includes helpful features such as hints, automatic mistake correction, score tracking, a timer and save/load functionality.
 
-A fully featured, object-oriented, cross-platform console Sudoku application written in **C++17**. The game features dynamic backtracking puzzle generation, a multi-tier difficulty system, real-time input sanitization, non-volatile state persistence (saving and loading games), an inline timer, mistake counters, auto-correction, and an interactive scoring system.
-
----
-
-
-## 📋 Table of Contents
-1. [Key Features](#-key-features)
-2. [Project Architecture & OOP Design](#-project-architecture--oop-design)
-3. [File Organization](#-file-organization)
-4. [Algorithm & Core Systems Explanation](#-algorithm--core-systems-explanation)
-   * [Backtracking Puzzle Generator](#1-backtracking-puzzle-generator)
-   * [Input Sanitization & Failure Recovery](#2-input-sanitization--failure-recovery)
-   * [Save System Data Specification](#3-save-system-data-specification)
-5. [Compilation & Execution Guide](#-compilation--execution-guide)
-6. [Detailed Rules & Gameplay Mechanics](#-detailed-rules--gameplay-mechanics)
-7. [Future Roadmap](#-future-roadmap)
-8. [Contributors & Acknowledgments](#-contributors--acknowledgments)
+The main objective of this project is to demonstrate the practical application of OOP concepts, recursion, backtracking and problem-solving techniques.
 
 ---
 
+✨ Key Features
 
-## 🚀 Key Features
-
-* **Procedural Board Generation:** Every game generates a brand-new, solvable Sudoku puzzle using a randomized recursive backtracking algorithm combined with `std::shuffle` and `std::mt19937`.
-* **Selectable Difficulties:**
-
-  * **Easy:** Removes 30 numbers (~51 initial clues).
-  * **Medium:** Removes 40 numbers (~41 initial clues).
-  * **Hard:** Removes 55 numbers (~26 initial clues).
-* **Fault-Tolerant Input Stream:** Uses `cin.clear()` and `numeric_limits<streamsize>::max()` to gracefully recover from non-numeric user entries without crashing or looping infinitely.
-* **Persistent State Management:** Save and resume games seamlessly via `savegame.txt`. Includes magic-header validation (`SUDOKU_SAVE_V1`) and numerical range checking to prevent corrupted file crashes.
-* **Assistive Gameplay Features:**
-  * **Hint System:** Automatically places the correct answer in the first available empty grid space (-20 score deduction).
-  * **AutoFix System:** Scans the board for player errors, clears incorrect entries, and overwrites them with the generated solution (-50 score deduction).
-* **Real-time Performance Metrics:** Tracks move duration in seconds (`<ctime>`), counts total invalid guesses, and updates cumulative scores.
+Feature| Description
+🎲 Random Puzzle Generation| Generates new Sudoku puzzles using backtracking.
+🟢 Easy Mode| Suitable for beginners.
+🟡 Medium Mode| Provides a moderate challenge.
+🔴 Hard Mode| Designed for experienced players.
+✅ Move Validation| Checks whether entered numbers follow Sudoku rules.
+💡 Hint System| Provides the correct answer for an empty cell.
+🔧 AutoFix System| Corrects incorrect entries automatically.
+⏱️ Game Timer| Tracks the time taken to complete the puzzle.
+🏆 Score System| Tracks player performance and scores.
+💾 Save & Load| Allows players to save and resume their games.
+⚠️ Error Handling| Handles invalid inputs without crashing the application.
 
 ---
 
-## 🛠️ Project Architecture & OOP Design
+🎮 Difficulty Levels
 
-The system adheres strictly to Object-Oriented Programming (OOP) principles, delegating logic across three core classes:
+The game provides three difficulty levels:
 
+Level| Numbers Removed| Initial Clues
+🟢 Easy| 30| 51
+🟡 Medium| 40| 41
+🔴 Hard| 55| 26
 
-### 1. `Player` Class
-* **Responsibility:** Manages player session metrics.
-* **Key Attributes:** `score` (starts at 1000), `mistakes`, `elapsedTime`, `startTime`.
-* **Key Methods:** `addScore()`, `addMistake()`, `getTime()`, `restore()`.
+Players can choose their preferred difficulty before starting a game.
 
-### 2. `SudokuBoard` Class
-* **Responsibility:** Controls grid state, generation, validation rules, display formatting, and disk serialization.
-* **Key Attributes:** 
-  * `board[9][9]`: The active grid modified by the user.
-  * `solution[9][9]`: The generated full grid solution key.
-  * `fixed[9][9]`: Boolean matrix denoting initial clue cells that cannot be edited.
-* **Key Methods:** `fillSolution()`, `isSafe()`, `generate()`, `display()`, `hint()`, `autofix()`, `save()`, `load()`.
+---
 
-### 3. `SudokuGame` Class
-* **Responsibility:** Orchestrates application execution flow, level selection, player interactions, and win-condition evaluations.
-* **Key Methods:** `start()`, `play()`, `readNumber()`, `checkCompletion()`.
+🏗️ Project Architecture
 
-## 📂 File Organization
+The project is organized into three main classes.
 
-```text
+1. Player Class
+
+Responsible for managing player information and performance.
+
+- Maintains the player's score.
+- Tracks the number of mistakes.
+- Records elapsed time.
+- Restores saved player information.
+
+2. SudokuBoard Class
+
+Responsible for managing the Sudoku puzzle.
+
+- Creates and displays the Sudoku grid.
+- Generates valid Sudoku solutions.
+- Validates rows, columns and 3×3 subgrids.
+- Provides hints and automatic corrections.
+- Handles saving and loading game data.
+
+3. SudokuGame Class
+
+Controls the overall game execution.
+
+- Starts the game.
+- Handles difficulty selection.
+- Accepts player input.
+- Controls the gameplay loop.
+- Checks whether the puzzle is completed.
+
+---
+
+🧠 Object-Oriented Programming Concepts
+
+This project uses class-based object-oriented design to organize the game functionality.
+
+OOP Concept| Application
+Encapsulation| Groups player and board data with their related methods.
+Abstraction| Separates game operations into classes with clear responsibilities.
+Inheritance| Document the actual parent-child class relationships here, if implemented.
+Polymorphism| Document actual method overriding or overloading here, if implemented.
+
+Note: Inheritance and polymorphism should only be described as implemented features if they are present in the source code.
+
+---
+
+⚙️ Algorithm Used
+
+Backtracking Algorithm
+
+Backtracking is a recursive problem-solving technique used to generate a valid Sudoku solution.
+
+How it works:
+
+1. Start with an empty Sudoku grid.
+2. Select an empty cell.
+3. Try numbers from 1 to 9.
+4. Check whether the number is valid in its row, column and 3×3 subgrid.
+5. If valid, place the number and move to the next cell.
+6. If no number works, return to the previous cell and try another number.
+7. Continue until the entire grid is completed.
+
+Algorithm flow:
+
+       Start
+         |
+   Find Empty Cell
+         |
+   Try Numbers 1-9
+         |
+    Is Number Safe?
+       /       \
+     Yes        No
+      |          |
+ Place Number   Try Next
+      |
+ Recursive Call
+      |
+  Grid Completed?
+    /       \
+  Yes        No
+   |          |
+ Return     Backtrack
+ Solution      |
+              Try Again
+
+The algorithm ensures that the generated Sudoku solution follows the standard Sudoku rules.
+
+---
+
+🛠️ Technologies Used
+
+- Programming Language: C++17
+- Programming Paradigm: Object-Oriented Programming
+- Algorithm: Recursive Backtracking
+- Libraries: STL, iostream, vector, algorithm, random and file handling libraries
+- Development Environment: Any C++17-compatible compiler
+
+---
+
+📂 Project Structure
+
 Sudoku-Game-cpp/
-├── main.cpp          # Entry point;                  
-                instantiates  and executes SudokuGame
+│
+├── include/
+│   └── Header files (.h)
+│
+├── src/
+│   └── Implementation files (.cpp)
+│
+├── main.cpp
+│
+└── README.md
 
-├── Player.h          # Declaration of the Player class
-├── Player.cpp        # Definition of Player methods and scoring logic
-├── SudokuBoard.h     # Declaration of the SudokuBoard class
-├── SudokuBoard.cpp   # Board generation, backtracking solver, save/load implementation
-├── SudokuGame.h      # Declaration of the main SudokuGame controller class
-├── SudokuGame.cpp    # CLI interface, move validation, game loop logic
-├── savegame.txt      # (Auto-generated) Serialized state file for saved games
-└── README.md         # Comprehensive project documentation
+Refer to the actual repository for the complete list of source and header filenames.
+
 ---
 
-📋 Algorithm & Core Systems Explanation
-1. Backtracking Puzzle Generator
-The grid is populated using a recursive backtracking technique:
-Base Case: If row == 9, the entire grid is successfully filled.
-Move Execution: Fill numbers 1 through 9 into array nums[9] and randomly shuffle them using std::mt19937.
-Safety Check (isSafe): Verify that number N does not exist in:
-The target row R.
-The target column C.
-The 3 \times 3 subgrid containing cell (R, C).
-Recursion & Backtracking: Place N in solution[R][C]. Recurse to column C+1. If downstream placement fails, reset solution[R][C] = 0 and attempt the next candidate.
+🚀 Installation and Execution
 
-2. Input Sanitization & Failure Recovery
-Standard console C++ apps often fail when string input is passed to integer cin variables. This project handles bad inputs safely:
+Prerequisites
 
-if (!(cin >> value)) {
-    cin.clear(); // Clear stream error flags
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid characters
-    cout << "Invalid input! Please enter a number.\n";
-}
+- C++ compiler supporting C++17.
+- GCC, MinGW or another compatible compiler.
+- Terminal or command prompt.
 
+Step 1: Clone the Repository
 
+git clone https://github.com/shaheedmastanshaik-byte/Sudoku-Game-cpp.git
 
-👥 11. Team Members
+Step 2: Navigate to the Project
 
-S. No.| Name
+cd Sudoku-Game-cpp
+
+Step 3: Compile the Project
+
+g++ -std=c++17 -Iinclude main.cpp src/*.cpp -o sudoku
+
+Step 4: Run the Game
+
+Windows:
+
+sudoku.exe
+
+Linux / macOS:
+
+./sudoku
+
+Adjust the compilation command if your actual source filenames or folder arrangement differ.
+
+---
+
+🖥️ Sample Gameplay
+
+<p align="center">
+  <b>Sudoku Game Interface</b>
+</p><!-- Add your actual game screenshots here --><p align="center">
+  <i>Screenshot 1: Main Menu</i>
+  <br/>
+  <i>Screenshot 2: Sudoku Gameplay</i>
+  <br/>
+  <i>Screenshot 3: Game Completion</i>
+</p>---
+
+🔮 Future Improvements
+
+Some possible improvements for future versions:
+
+- Develop a graphical user interface (GUI).
+- Add more Sudoku difficulty levels.
+- Introduce a leaderboard system.
+- Add sound effects and animations.
+- Improve puzzle uniqueness validation.
+- Add more customization options.
+- Implement additional testing for puzzle generation and saving.
+
+---
+
+👥 Team Members
+
+This project was developed collaboratively by:
+
+S.No.| Team Member
 1| Shaheed Mastan Shaik
 2| M. Jeevan Kumar
 3| V. Manoj Kumar
 4| M. Sahith
 
-📌 12. Project Status
+---
 
-The project currently includes console-based Sudoku gameplay, randomized solution generation, three difficulty levels, score tracking, a timer, hints, automatic mistake correction, and save/load functionality.
+🎯 Project Objective
 
-Further improvements are planned to enhance puzzle quality, modularity, testing, and user experience.
+The primary objective of this project is to apply programming concepts to develop an interactive Sudoku game while gaining practical experience in:
+
+- Object-Oriented Programming.
+- Recursion and Backtracking.
+- Problem-Solving Techniques.
+- Data Validation.
+- File Handling.
+- Team Collaboration.
+
+---
+
+❤️ Acknowledgements
+
+We would like to thank our faculty and everyone who supported us during the development of this project.
+
+This project helped us strengthen our C++ programming knowledge and understand how theoretical programming concepts can be applied to real-world applications.
 
 ---
 
 <p align="center">
-  <b>Developed with ❤️ using C++</b>
+  <b>⭐ If you like this project, consider giving it a star!</b>
+  <br/><br/>
+  <b>Made with ❤️ using C++</b>
   <br/>
-  <i>Sudoku Game – A Logical Approach to Problem Solving</i>
+  <i>Think Smart. Solve Smart. Play Sudoku!</i>
 </p>
+
+
+
+
