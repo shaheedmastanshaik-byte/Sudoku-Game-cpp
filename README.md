@@ -200,17 +200,8 @@ Adjust the compilation command if your actual source filenames or folder arrange
 
 ---
 
-🖥️ Sample Gameplay
 
-<p align="center">
-  <b>Sudoku Game Interface</b>
-</p><!-- Add your actual game screenshots here --><p align="center">
-  <i>Screenshot 1: Main Menu</i>
-  <br/>
-  <i>Screenshot 2: Sudoku Gameplay</i>
-  <br/>
-  <i>Screenshot 3: Game Completion</i>
-</p>---
+
 
 🔮 Future Improvements
 
